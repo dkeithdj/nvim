@@ -1,13 +1,12 @@
 local lsp = require'lspconfig'
 local completion = require'completion'
-local othermap = require('utils').map
+-- local othermap = require('utils').map
 
 local function map(mode, lhs, rhs, opts)
   local options = {noremap = true}
   if opts then options = vim.tbl_extend('force', options, opts) end
   vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
-
 local custom_attach = function()
     print("LSP Started.");
     completion.on_attach()
@@ -29,7 +28,6 @@ local custom_attach = function()
     map('n','<leader>ai','<cmd>lua vim.lsp.buf.incoming_calls()<CR>')
     map('n','<leader>ao','<cmd>lua vim.lsp.buf.outgoing_calls()<CR>')
 end
-
 lsp.clangd.setup{
     cmd = {
         "clangd",
@@ -83,8 +81,18 @@ lsp.sumneko_lua.setup{
     },
     on_attach=custom_attach,
 }
-vim.g.completion_matching_strategy_list = { 'exact', 'substring', 'fuzzy' }
-vim.g.completion_confirm_key = ""
-vim.g.completion_enable_snippet = 'UltiSnips'
-vim.g.completion_sorting = "none"
 
+--webDev HTML
+--Enable (broadcasting) snippet capability for completion
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+lsp.html.setup {
+  capabilities = capabilities,
+  on_attach = custom_attach
+}
+lsp.cssls.setup{on_attach=custom_attach}
+
+vim.g.completion_matching_strategy_list = { 'exact', 'substring', 'fuzzy' }
+vim.g.completion_confirm_key = "<c-y>"
+vim.g.completion_enable_snippet = 'snippets.nvim'
+-- vim.g.completion_sorting = "none"

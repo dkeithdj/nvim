@@ -18,7 +18,7 @@ map.n['<leader>l'] = {'<cmd>wincmd l<CR>', 'noremap'}
 
 map.n['<leader>,'] = {'<cmd>noh<CR>', 'noremap'}
 
-map.n['<leader><CR>'] = {'<cmd>so ~/AppData/Local/nvim/init.vim<CR>', 'noremap'}
+map.n['<leader><CR>'] = {'<cmd>luaf %<CR>', 'noremap'}
 
 map.v['<leader>p'] = {'"_dP<CR>', 'noremap'}
 map.v['<leader>y'] = {'"+y<CR>', 'noremap'}

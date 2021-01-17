@@ -1,4 +1,4 @@
-vim.cmd( 'packadd packer.nvim' )
+vim.cmd [[packadd packer.nvim]]
 
 local execute = vim.api.nvim_command
 local fn = vim.fn
@@ -12,6 +12,9 @@ end
 
 return require('packer').startup(
 function(use)
+
+  use {'wbthomason/packer.nvim', opt = true}
+
   --lsp plugins
   use 'neovim/nvim-lspconfig'
   use 'nvim-lua/completion-nvim'
@@ -20,20 +23,19 @@ function(use)
   -- use 'tjdevries/lsp_extensions.nvim'
   -- use 'neoclide/coc.nvim', {'branch': 'release'}
 
-  -- Better Syntax Support
-  -- use 'sheerun/vim-polyglot'
-  use 'SirVer/ultisnips'
-  use 'honza/vim-snippets'
+  -- use 'SirVer/ultisnips'
+  -- use 'honza/vim-snippets'
+  use 'norcalli/snippets.nvim'
 
   --Tree sitter
   use {
     'nvim-treesitter/nvim-treesitter',
     run = function() vim.cmd [[TSUpdate]] end,
     requires = {
-      -- {'nvim-treesitter/nvim-treesitter-refactor', opt = true},
-      -- {'nvim-treesitter/nvim-treesitter-textobjects', opt = true},
+      {'nvim-treesitter/nvim-treesitter-refactor', opt = true},
+      {'nvim-treesitter/nvim-treesitter-textobjects', opt = true},
       {'nvim-treesitter/playground'},
-      -- {'romgrk/nvim-treesitter-context', opt = true},
+      {'romgrk/nvim-treesitter-context', opt = true},
     },
   }
 
@@ -42,8 +44,6 @@ function(use)
   use 'ryanoasis/vim-devicons'
 
   -- Auto pairs for '(' '[' '{'
-  -- use 'jiangmiao/auto-pairs'
-  -- use 'tpope/vim-endwise'
   use 'rstacruz/vim-closer'
 
   use 'vim-utils/vim-man'
@@ -64,8 +64,8 @@ function(use)
   use 'tpope/vim-surround'
   use 'tpope/vim-commentary'
 
-  use 'morhetz/gruvbox'
-  -- use 'lifepillar/vim-gruvbox8'
+  use 'gruvbox-community/gruvbox'
+  -- use 'lifepillar/vim-gruvbox-17'
   use 'vim-airline/vim-airline'
   use 'vim-airline/vim-airline-themes'
   use 'octol/vim-cpp-enhanced-highlight'
